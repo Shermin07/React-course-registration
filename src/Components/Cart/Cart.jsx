@@ -8,21 +8,21 @@ const Cart = ({selectedCourses,hours, totalHours}) => {
     let count = 1; 
     return (
         <div className='w-[300px] text-center bg-blue-200  rounded m-3'>
-            <h1>Credit Hour Remaining  :{hours} hr</h1>
-   <h1 className='text-2xl font-bold mb-5'>Courses Name <br></br>
+            <h1 className='text-xl font-semibold pt-3 pb-2 border-b-2 '>Credit Hour Remaining : {hours} hr</h1>
+   <h1 className='text-2xl font-semibold mb-5'>Courses Name <br></br>
          
          </h1>  
        
               
 {
     selectedCourses.map((courses) =>(
-  <h1 key={courses.id} className='text-lg mb-5 font-semibold'>{count++}. {courses.Title}
+  <h1 key={courses.id} className='text-md mb-5  text-gray-700 font-semibold'>{count++}. {courses.Title}
    
   </h1>
  ))
 }
 
-<h1>Total Credit Hour: {`${ totalHours} hr`}</h1> 
+<h1 className='font-semibold border-t-2'>Total Credit Hour: {`${ totalHours} hr`}</h1> 
            
             
     </div>        

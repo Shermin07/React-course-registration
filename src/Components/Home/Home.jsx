@@ -1,13 +1,16 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable no-unused-vars */
+
+
 import React, { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
+import { BsBook } from 'react-icons/bs';
 
 const Home = () => {
 const [allCourses, setAllCourses] = useState([]);
 const [selectedCourses, setSelectedCourses] = useState([]);
-const [hours, setRemainingHours ] = useState(0);
+const [hours, setRemainingHours ] = useState(20);
 const [totalHours, setTotalHours] = useState(0);
 
 useEffect( () =>{
@@ -23,28 +26,42 @@ const handleSelectedCourse = (course)=>{
     );
     let count = course.Credit ;
     if(isTaken){
-        return alert ('Already took this course');
+        return alert ('Already enroll this course');
     }
+
     else{
       selectedCourses.forEach((hour) => {
         count = count + hour.Credit ;
       } );
 
-      const newRemaining = 20 - count ;
+      
 
-     
+      
 
      if(count > 20){
-        return alert('Hours limited')
+        
+        return alert('Hours limited,you can not take another course')
 
       }
+     
       else{
-        const  totalRemaining = parseFloat(newRemaining);
-        setRemainingHours(totalRemaining);
+
         setTotalHours(count);
+        const newRemaining = 20 - count ;
+        const  totalRemaining = parseFloat(newRemaining);
+       
+        setRemainingHours(totalRemaining);
+
+        if (totalRemaining === 0){
+            return alert('You can not take any course')
+        }
+        setSelectedCourses([...selectedCourses, course]);
+
+      
+       
       }
 
-        setSelectedCourses([...selectedCourses, course]);
+       
     }
     
 };
@@ -70,8 +87,9 @@ const handleSelectedCourse = (course)=>{
                             </h2>
                             <p>{course.Description}</p>
                             <div className="card-actions  ">
-                                <div className="badge font-bold text-lg ">$ {course.Price}</div>
-                                <div className="badge font-bold text-lg ml-16 ">{course.Credit} hr</div>
+                                <div className="badge font-bold text-md ">$ {course.Price}</div>
+                                <BsBook className='ml-5'></BsBook>
+                                <div className="badge font-bold text-lg  ">{course.Credit} hr</div>
                             </div>
                             <button onClick={()=>handleSelectedCourse(course)}  className='btn btn-primary mt-4 p-3'>Select</button>
                         </div>
