@@ -7,6 +7,8 @@ import Cart from '../Cart/Cart';
 const Home = () => {
 const [allCourses, setAllCourses] = useState([]);
 const [selectedCourses, setSelectedCourses] = useState([]);
+const [hours, setRemainingHours ] = useState(0);
+const [totalHours, setTotalHours] = useState(0);
 
 useEffect( () =>{
     fetch('./data.json')
@@ -19,10 +21,29 @@ const handleSelectedCourse = (course)=>{
     const isTaken = selectedCourses.find((sub) => sub.Id === course.Id
     
     );
+    let count = course.Credit ;
     if(isTaken){
         return alert ('Already took this course');
     }
     else{
+      selectedCourses.forEach((hour) => {
+        count = count + hour.Credit ;
+      } );
+
+      const newRemaining = 20 - count ;
+
+     
+
+     if(count > 20){
+        return alert('Hours limited')
+
+      }
+      else{
+        const  totalRemaining = parseFloat(newRemaining);
+        setRemainingHours(totalRemaining);
+        setTotalHours(count);
+      }
+
         setSelectedCourses([...selectedCourses, course]);
     }
     
@@ -48,9 +69,9 @@ const handleSelectedCourse = (course)=>{
                                 
                             </h2>
                             <p>{course.Description}</p>
-                            <div className="card-actions ">
+                            <div className="card-actions  ">
                                 <div className="badge font-bold text-lg ">$ {course.Price}</div>
-                                <div className="badge font-bold text-lg ">{course.Credit}</div>
+                                <div className="badge font-bold text-lg ml-16 ">{course.Credit} hr</div>
                             </div>
                             <button onClick={()=>handleSelectedCourse(course)}  className='btn btn-primary mt-4 p-3'>Select</button>
                         </div>
@@ -65,7 +86,7 @@ const handleSelectedCourse = (course)=>{
                }
                 </div>
                 <div className='cart-container'>
-                 <Cart selectedCourses = {selectedCourses}></Cart>
+                 <Cart totalHours = {totalHours} hours = {hours} selectedCourses = {selectedCourses}></Cart>
                 </div>
 
             </div>
