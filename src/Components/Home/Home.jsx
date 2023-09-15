@@ -7,11 +7,15 @@ import React, { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
 import { BsBook } from 'react-icons/bs';
 
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+
 const Home = () => {
 const [allCourses, setAllCourses] = useState([]);
 const [selectedCourses, setSelectedCourses] = useState([]);
 const [hours, setRemainingHours ] = useState(20);
 const [totalHours, setTotalHours] = useState(0);
+const [totalCost, setTotalCost] = useState(0);
 
 useEffect( () =>{
     fetch('./data.json')
@@ -25,22 +29,20 @@ const handleSelectedCourse = (course)=>{
     
     );
     let count = course.Credit ;
+  
     if(isTaken){
-        return alert ('Already enroll this course');
+       toast ('This course is already in your cart');
     }
 
     else{
       selectedCourses.forEach((hour) => {
         count = count + hour.Credit ;
+
       } );
-
-      
-
-      
 
      if(count > 20){
         
-        return alert('Hours limited,you can not take another course')
+        toast('Hours limited,you can not take another course')
 
       }
      
@@ -53,7 +55,7 @@ const handleSelectedCourse = (course)=>{
         setRemainingHours(totalRemaining);
 
         if (totalRemaining === 0){
-            return alert('You can not take any course')
+           toast('Sorry,Your reamaining hour is done')
         }
         setSelectedCourses([...selectedCourses, course]);
 
@@ -73,23 +75,21 @@ const handleSelectedCourse = (course)=>{
         <div className='container '>
             <h1 className='text-center text-4xl font-bold mb-7'>Course Registration</h1>
             <div className='home-container  flex'>
-                <div className='card-container grid grid-cols-3 gap-4'>
+                <div className='card-container  grid grid-cols-3 gap-4'>
                {
                 allCourses.map((course) =>(
-                    <>
-                    
                     <div  key={course.Id} className="card bg-base-100 shadow-xl">
                         <figure ><img className='h-40 mx-2' src={course.Image}  alt={`computer-courses`}  /></figure>
                         <div className="card-body">
-                            <h2 className="card-title">
-                               {course.Title}
+                            <h3 className="card-title ">
+                               <h4 className='text-md font-bold'>{course.Title}</h4>
                                 
-                            </h2>
-                            <p>{course.Description}</p>
+                            </h3>
+                            <p className='text-sm'>{course.Description}</p>
                             <div className="card-actions  ">
-                                <div className="badge font-bold text-md ">$ {course.Price}</div>
-                                <BsBook className='ml-5'></BsBook>
-                                <div className="badge font-bold text-lg  ">{course.Credit} hr</div>
+                                <div className="font-bold text-md ">$ {course.Price}</div>
+                                <BsBook className='ml-20 mt-[7px] '></BsBook>
+                                <div className="font-bold text-lg  ">{course.Credit} hr</div>
                             </div>
                             <button onClick={()=>handleSelectedCourse(course)}  className='btn btn-primary mt-4 p-3'>Select</button>
                         </div>
@@ -97,19 +97,20 @@ const handleSelectedCourse = (course)=>{
                     </div>
                    
                    
-                           
-                        </>
+                         
+                       
                 )
                 )
                }
                 </div>
                 <div className='cart-container'>
-                 <Cart totalHours = {totalHours} hours = {hours} selectedCourses = {selectedCourses}></Cart>
+                 <Cart totalHours = {totalHours} hours = {hours} selectedCourses = {selectedCourses} ></Cart>
                 </div>
 
             </div>
-            
+            <ToastContainer></ToastContainer>   
         </div>
+        
     );
 };
 

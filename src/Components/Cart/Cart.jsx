@@ -16,13 +16,14 @@ const Cart = ({selectedCourses,hours, totalHours}) => {
               
 {
     selectedCourses.map((courses) =>(
-  <h1 key={courses.id} className='text-md mb-5  text-gray-700 font-semibold'>{count++}. {courses.Title}
+  <h1 key={courses.id} className='text-md mb-5  text-gray-600 font-semibold'>{count++}. {courses.Title}
    
   </h1>
  ))
 }
 
-<h1 className='font-semibold border-t-2'>Total Credit Hour: {`${ totalHours} hr`}</h1> 
+<h1 className='font-semibold border-t-2'>Total Credit Hour: {`${totalHours} hr`}</h1> 
+  <h1 className='font-semibold border-t-2'>Total Cost: {` $`}</h1> 
            
             
     </div>        

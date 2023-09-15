@@ -1,8 +1,21 @@
-# React + Vite
+Here i give the explanation :: 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Course Selection and Management:**
+  - Users can easily browse and select computer courses from the available list.
+  - The application provides a user-friendly interface for managing selected courses.
+  - Real-time updates on remaining hours and total cost keep users informed.
 
-Currently, two official plugins are available:
+**Error Notifications with `react-toastify`:**
+  - Utilizes the `react-toastify` library to provide user-friendly error notifications.
+  - Notifications are triggered when users attempt to:
+    - Select a course that is already in their cart.
+    - Exceed the available hours for course selection.
+  - Enhances the overall user experience by providing informative feedback.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Efficient Data Loading with `useEffect`:**
+  - Utilizes the `useEffect` hook to asynchronously load course data from a JSON file.
+  - Ensures that users always have access to up-to-date course information.
+  - Leveraging React's efficient rendering and updating mechanism for optimal  performance.
+
+
+
