@@ -72,10 +72,10 @@ const handleSelectedCourse = (course)=>{
 
 
     return (
-        <div className='container '>
-            <h1 className='text-center text-4xl font-bold mb-7'>Course Registration</h1>
-            <div className='home-container  flex'>
-                <div className='card-container  grid grid-cols-3 gap-4'>
+        <div className='container'>
+            <h1 className='text-center text-2xl md:text-4xl font-bold mb-7'>Course Registration</h1>
+            <div className='home-container  md:flex'>
+                <div className='card-container  grid grid-cols-1  md:grid-cols-1 lg:grid-cols-3 gap-4'>
                {
                 allCourses.map((course) =>(
                     <div  key={course.Id} className="card bg-base-100 shadow-xl">
